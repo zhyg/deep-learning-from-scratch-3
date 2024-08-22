@@ -11,6 +11,7 @@ class Config:
 def using_config(name, value):
     old_value = getattr(Config, name)
     setattr(Config, name, value)
+    # 如果with块中发生了异常，这个异常也会被发送到正在执行yield的地方。因此，yield必须用try/finally括起来。
     try:
         yield
     finally:
@@ -90,9 +91,9 @@ class Function:
         outputs = [Variable(as_array(y)) for y in ys]
 
         if Config.enable_backprop:
-            self.generation = max([x.generation for x in inputs])
+            self.generation = max([x.generation for x in inputs]) # 设置"辈分"，用于确定反向传播时节点的遍历顺序
             for output in outputs:
-                output.set_creator(self)
+                output.set_creator(self) #设置“连接”
             self.inputs = inputs
             self.outputs = [weakref.ref(output) for output in outputs]
 
