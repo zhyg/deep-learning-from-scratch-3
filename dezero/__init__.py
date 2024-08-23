@@ -1,5 +1,8 @@
 # =============================================================================
-# step23.pyからstep32.pyまではsimple_coreを利用
+# 在 step23.py 到 step32.py 之间使用 simple_core
+# 根据章节进度修改is_simple_core标识
+# 从到步骤23到步骤32为is_simple_core=True
+# 从步骤33开始为is_simple_core=False
 is_simple_core = False  # True
 # =============================================================================
 
